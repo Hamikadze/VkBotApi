@@ -51,7 +51,7 @@ namespace VkBotApi
                             var strCommand = message_text.Substring(0, message_text.Contains(" ") ? message_text.IndexOf(" ", StringComparison.Ordinal) : message_text.Length).Trim();
                             var tempReceivedItem =
                                 new RMessagesData.RCmdsListCollect.RCommandsItem(
-                                    tempMessage.Object.Date.ToDateTimeFromUnix(), message_text, strCommand, tempMessage?.Object.Attachments, tempMessage.Object.FromId, tempMessage.Object.PeerId, tempMessage.Object.Id,
+                                    tempMessage.Object.Date.ToDateTimeFromUnix(), message_text, strCommand, tempMessage?.Object.Attachments, tempMessage.Object.From_Id, tempMessage.Object.Peer_Id, tempMessage.Object.Id,
                                     messageCmd, tempMessage.Object);
                             RMessagesData.RCmdsListCollect.RCmdsList.Add(tempReceivedItem);
 

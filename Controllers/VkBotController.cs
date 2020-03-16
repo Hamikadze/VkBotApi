@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace VkBotApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class VkBotController : ControllerBase
     {
@@ -16,12 +16,12 @@ namespace VkBotApi.Controllers
 
         // POST api/botigor
         [HttpPost]
-        public ActionResult<string> Post(CoreResponse value)
+        public ActionResult<string> Post(JsonCore.VK.MessageNew.CoreResponse value)
         {
             switch (value.Type)
             {
                 case "confirmation":
-                    switch (value.GroupId)
+                    switch (value.Group_Id)
                     {
                         case 178653938:
                             return AdminSettings.VK_CONFORMATION_KEY;
@@ -34,10 +34,8 @@ namespace VkBotApi.Controllers
                     break;
 
                 case "message_new":
-                    var raw_response = JsonConvert.SerializeObject(value);
-                    var des_response = JsonConvert.DeserializeObject<JsonCore.VK.MessageNew.CoreResponse>(raw_response);
                     lock (MessageNewQueue)
-                        MessageNewQueue.Add(des_response);
+                        MessageNewQueue.Add(value);
                     break;
 
                 default:
@@ -45,27 +43,6 @@ namespace VkBotApi.Controllers
                     break;
             }
             return "ok";
-        }
-
-        public class CoreResponse
-        {
-            [JsonProperty("type")]
-            public string Type { get; set; }
-
-            [JsonProperty("object")]
-            public object Object { get; set; }
-
-            [JsonProperty("group_id")]
-            public int GroupId { get; set; }
-        }
-
-        public class Object
-        {
-            [JsonProperty("user_id")]
-            public int UserId { get; set; }
-
-            [JsonProperty("join_type")]
-            public string JoinType { get; set; }
         }
     }
 }

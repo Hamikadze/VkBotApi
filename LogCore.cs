@@ -12,51 +12,40 @@ namespace VkBotApi
 
         private static Thread _logWriteThread = new Thread((() => { }));
 
-        public static void Log(string message, string fullmessage, EnumData.LogTypeCommand mtype, EnumData.LogSourceCommand logSource)
+        public static void Log(string message, string fullMessage, EnumData.LogTypeCommand mtype, EnumData.LogSourceCommand logSource)
         {
             Task.Factory.StartNew(() =>
             {
-                var logItem = new LogListCollect.LogItem(DateTime.Now, message, fullmessage, mtype, logSource);
+                var logItem = new LogListCollect.LogItem(DateTime.Now, message, fullMessage, mtype, logSource);
                 LogListCollect.LogItemsWriteList.Add(logItem);
-                LogListCollect.LogItemsShowList.Add(logItem);
             });
-            //logCore.AddLogEventArgs(null, new LogEventArgs(message, fullmessage, mtype, logSource));
         }
 
-        public static string GetType(EnumData.LogTypeCommand tc, out Color rColor)
+        public static string GetType(EnumData.LogTypeCommand tc)
         {
             switch (tc)
             {
                 case EnumData.LogTypeCommand.Error:
-                    rColor = Color.DarkRed;
                     return "ERROR";
 
                 case EnumData.LogTypeCommand.Info:
-                    rColor = Color.DarkGreen;
                     return "INFO";
 
                 case EnumData.LogTypeCommand.InfoSuccess:
-                    rColor = Color.LimeGreen;
                     return "INFO";
 
                 case EnumData.LogTypeCommand.Message:
-                    rColor = Color.Magenta;
                     return "INFO";
 
                 case EnumData.LogTypeCommand.CMessage:
-                    rColor = Color.DarkMagenta;
                     return "INFO";
 
                 case EnumData.LogTypeCommand.Attention:
-                    rColor = Color.DarkCyan;
                     return "ATTENTION";
 
                 case EnumData.LogTypeCommand.System:
-                    rColor = Color.Black;
                     return "SYSTEM";
             }
-
-            rColor = Color.Gray;
             return "OTHER";
         }
 
@@ -97,13 +86,11 @@ namespace VkBotApi
                                 continue;
                             }
                             var logItem = LogListCollect.LogItemsWriteList[0];
-                            Color rColor;
-                            LogCore.GetType(logItem.MType, out rColor);
                             if (string.IsNullOrWhiteSpace(logItem.FullMessage))
                                 logItem.FullMessage = logItem.Message;
                             if (logItem.MType != EnumData.LogTypeCommand.None)
                             {
-                                FileCore.PathLog.SaveToFile($"{LogCore.GetType(logItem.MType, out rColor)} [{LogCore.GetSource(logItem.LogSource)}] ({logItem.DateTime:dd.MM.yyyy HH:mm:ss:fffff}) {logItem.FullMessage}", true);
+                                FileCore.PathLog.SaveToFile($"{GetType(logItem.MType)} [{GetSource(logItem.LogSource)}] ({logItem.DateTime:dd.MM.yyyy HH:mm:ss:fffff}) {logItem.FullMessage}", true);
                             }
                             LogListCollect.LogItemsWriteList.Remove(logItem);
                         }
@@ -122,15 +109,14 @@ namespace VkBotApi
     public static class LogListCollect
     {
         public static List<LogItem> LogItemsWriteList = new List<LogItem>();
-        public static List<LogItem> LogItemsShowList = new List<LogItem>();
 
         public class LogItem
         {
-            public LogItem(DateTime dateTime, string message, string fullmessage, EnumData.LogTypeCommand mtype, EnumData.LogSourceCommand logSource)
+            public LogItem(DateTime dateTime, string message, string fullMessage, EnumData.LogTypeCommand mtype, EnumData.LogSourceCommand logSource)
             {
                 DateTime = dateTime;
                 Message = message;
-                FullMessage = fullmessage;
+                FullMessage = fullMessage;
                 MType = mtype;
                 LogSource = logSource;
             }

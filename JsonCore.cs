@@ -297,10 +297,10 @@ namespace VkBotApi
                     public int Id { get; set; }
 
                     [JsonProperty("album_id")]
-                    public int AlbumId { get; set; }
+                    public int Album_Id { get; set; }
 
                     [JsonProperty("owner_id")]
-                    public int OwnerId { get; set; }
+                    public int Owner_Id { get; set; }
 
                     [JsonProperty("sizes")]
                     public Size[] Sizes { get; set; }
@@ -312,7 +312,7 @@ namespace VkBotApi
                     public int Date { get; set; }
 
                     [JsonProperty("access_key")]
-                    public string AccessKey { get; set; }
+                    public string Access_Key { get; set; }
                 }
 
                 public class Audio
@@ -321,7 +321,7 @@ namespace VkBotApi
                     public int Id { get; set; }
 
                     [JsonProperty("owner_id")]
-                    public int OwnerId { get; set; }
+                    public int Owner_Id { get; set; }
 
                     [JsonProperty("artist")]
                     public string Artist { get; set; }
@@ -339,10 +339,10 @@ namespace VkBotApi
                     public string Url { get; set; }
 
                     [JsonProperty("genre_id")]
-                    public int GenreId { get; set; }
+                    public int Genre_Id { get; set; }
 
                     [JsonProperty("is_hq")]
-                    public bool IsHq { get; set; }
+                    public bool Is_Hq { get; set; }
                 }
 
                 public class Attachment
@@ -366,7 +366,7 @@ namespace VkBotApi
                     public int Date { get; set; }
 
                     [JsonProperty("from_id")]
-                    public int FromId { get; set; }
+                    public int From_Id { get; set; }
 
                     [JsonProperty("text")]
                     public string Text { get; set; }
@@ -375,7 +375,7 @@ namespace VkBotApi
                     public Attachment[] Attachments { get; set; }
 
                     [JsonProperty("update_time")]
-                    public int UpdateTime { get; set; }
+                    public int Update_Time { get; set; }
                 }
 
                 public class Object
@@ -384,7 +384,7 @@ namespace VkBotApi
                     public int Date { get; set; }
 
                     [JsonProperty("from_id")]
-                    public int FromId { get; set; }
+                    public int From_Id { get; set; }
 
                     [JsonProperty("id")]
                     public int Id { get; set; }
@@ -393,28 +393,28 @@ namespace VkBotApi
                     public int Out { get; set; }
 
                     [JsonProperty("peer_id")]
-                    public int PeerId { get; set; }
+                    public int Peer_Id { get; set; }
 
                     [JsonProperty("text")]
                     public string Text { get; set; }
 
                     [JsonProperty("conversation_message_id")]
-                    public int ConversationMessageId { get; set; }
+                    public int Conversation_Message_Id { get; set; }
 
                     [JsonProperty("fwd_messages")]
-                    public List<FwdMessage> FwdMessages { get; set; }
+                    public List<FwdMessage> Fwd_Messages { get; set; }
 
                     [JsonProperty("important")]
                     public bool Important { get; set; }
 
                     [JsonProperty("random_id")]
-                    public int RandomId { get; set; }
+                    public int Random_Id { get; set; }
 
                     [JsonProperty("attachments")]
                     public List<Attachment> Attachments { get; set; }
 
                     [JsonProperty("is_hidden")]
-                    public bool IsHidden { get; set; }
+                    public bool Is_Hidden { get; set; }
                 }
 
                 public class AudioMsg
@@ -426,16 +426,16 @@ namespace VkBotApi
                     public int[] Waveform { get; set; }
 
                     [JsonProperty("link_ogg")]
-                    public string LinkOgg { get; set; }
+                    public string Link_Ogg { get; set; }
 
                     [JsonProperty("link_mp3")]
-                    public string LinkMp3 { get; set; }
+                    public string Link_Mp3 { get; set; }
                 }
 
                 public class Preview
                 {
                     [JsonProperty("audio_msg")]
-                    public AudioMsg AudioMsg { get; set; }
+                    public AudioMsg Audio_Msg { get; set; }
                 }
 
                 public class Doc
@@ -444,7 +444,7 @@ namespace VkBotApi
                     public int Id { get; set; }
 
                     [JsonProperty("owner_id")]
-                    public int OwnerId { get; set; }
+                    public int Owner_Id { get; set; }
 
                     [JsonProperty("title")]
                     public string Title { get; set; }
@@ -468,7 +468,7 @@ namespace VkBotApi
                     public Preview Preview { get; set; }
 
                     [JsonProperty("access_key")]
-                    public string AccessKey { get; set; }
+                    public string Access_Key { get; set; }
                 }
 
                 public class CoreResponse
@@ -480,7 +480,7 @@ namespace VkBotApi
                     public Object Object { get; set; }
 
                     [JsonProperty("group_id")]
-                    public int GroupId { get; set; }
+                    public int Group_Id { get; set; }
 
                     [JsonProperty("error")]
                     public VK.Error Error { get; set; }

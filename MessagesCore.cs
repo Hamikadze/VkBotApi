@@ -20,19 +20,19 @@ namespace VkBotApi
         {
             try
             {
-                var attachmentsFwd = item?.FwdMessages?.FindAll(i => i != null && i.Attachments.Any()).SelectMany(i => i.Attachments).ToList();
+                var attachmentsFwd = item?.Fwd_Messages?.FindAll(i => i != null && i.Attachments.Any()).SelectMany(i => i.Attachments).ToList();
                 var findResultFwd =
-                    attachmentsFwd?.Find(l => !string.IsNullOrWhiteSpace(l.Doc?.Preview?.AudioMsg.LinkMp3));
+                    attachmentsFwd?.Find(l => !string.IsNullOrWhiteSpace(l.Doc?.Preview?.Audio_Msg.Link_Mp3));
                 if (findResultFwd != null)
                 {
-                    return findResultFwd.Doc.Preview.AudioMsg.LinkMp3;
+                    return findResultFwd.Doc.Preview.Audio_Msg.Link_Mp3;
                 }
                 var attachments = item?.Attachments;
                 var findResult =
-                    attachments?.Find(l => !string.IsNullOrWhiteSpace(l.Doc?.Preview?.AudioMsg.LinkMp3));
+                    attachments?.Find(l => !string.IsNullOrWhiteSpace(l.Doc?.Preview?.Audio_Msg.Link_Mp3));
                 if (findResult != null)
                 {
-                    return findResult.Doc.Preview.AudioMsg.LinkMp3;
+                    return findResult.Doc.Preview.Audio_Msg.Link_Mp3;
                 }
 
                 return string.Empty;
